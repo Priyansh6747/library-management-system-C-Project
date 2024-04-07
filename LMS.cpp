@@ -269,7 +269,7 @@ void bookissue()
     char sn[6],bn[6];
     int found=0,flag=0;
     cout<<"\n\nBOOK ISSUE...";
-    cout<<"\n\n\tEnter Admission no.";
+    cout<<"\n\n\tEnter Enrollment no.";
     cin>>sn;
     fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);

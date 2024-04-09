@@ -416,7 +416,7 @@ void adminmenu()
     cout<<"\n\n\n\t4.MODIFY STUDENT RECORD";
     cout<<"\n\n\n\t5.DELETE STUDENT RECORD";
     cout<<"\n\n\n\t6.CREATE BOOK";
-    cout<<"\n\n\n\t7.CREATE ALL BOOKS";
+    cout<<"\n\n\n\t7.DISPLAY ALL BOOKS";
     cout<<"\n\n\n\t8.DISPLAY SPECIFIC BOOK";
     cout<<"\n\n\n\t9.MODIFY BOOK RECORD";
     cout<<"\n\n\n\t10.DELETE BOOK RECORD";

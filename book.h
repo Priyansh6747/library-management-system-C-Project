@@ -14,8 +14,9 @@ public:
         cout<<"\nNEW BOOK ENTRY...\n";
         cout<<"\nENTER BOOK NO.";
         cin>>bno;
-        cout<<"\nENTER BOOK NAME";
-        gets(bname);//enables enter with space
+        cout<<"\nENTER BOOK NAME"<<endl;
+        cin.ignore();
+        cin.getline(bname,30);
         cout<<"\nENTER AUTHOR NAME";
         gets(aname);
         cout<<"\n\n\nBook Created..";

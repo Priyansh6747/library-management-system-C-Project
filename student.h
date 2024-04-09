@@ -14,8 +14,9 @@ public:
         cout<<"\nNEW STUDENT ENTRY...\n";
         cout<<"\nEnter The Admission No. ";
         cin>>admno;
-        cout<<"Enter The Student Name ";
-        gets(name);
+        cout<<"Enter The Student Name "<<endl;
+        cin.ignore();
+        std::cin.getline(name, 10);
         token=0;
         stbno[0]='\0';
         cout<<"\n\nStudent Record Created...";

@@ -474,22 +474,41 @@ int main()
         cout<<"\n\n\n\t3 ADMINISTRATOR MENU";
         cout<<"\n\n\n\t4 EXIT";
         cout<<"\n\n\n\t PLEASE SELECT YOUR OPTION(1-4)";
-        cin>>ch;
-        switch(ch)
-        { case '1': bookissue();
-                break;
-            case '2': bookdeposit();
-                break;
-            case '3':
-                adminmenu();
-                break;
-            case '4':
-                exit(0);
-                break;
-            default:
-                cout<<"INVALID CHOICE";
-
+        try {
+            cin>>ch;
+            if(ch >= 'A' && ch <= 'Z')
+                throw "Character";
+            else if(ch >= 'a' && ch <= 'z')
+                throw "Character";
+            switch(ch)
+            { case '1': bookissue();
+                    break;
+                case '2': bookdeposit();
+                    break;
+                case '3':
+                    adminmenu();
+                    break;
+                case '4':
+                    exit(0);
+                    break;
+                default:
+                    if(ch > '0' && ch < '9')
+                        throw '0';
+            }
+        }
+        catch (char Error_Code)
+        {
+            if(Error_Code == '0')
+            {
+                cerr<<"\tInvalid choice "<<endl;
+                return 0;
+            }
+        }
+        catch (...)
+        {
+            cerr<<"\tPlease Enter a number"<<endl;
+            return 0;
         }
     }while(ch!=4 );
-
+    return 0;
 }

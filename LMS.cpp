@@ -16,7 +16,7 @@ student st;//student class object
 void writestudent()
 {
     char ch;
-    fp.open("student.dat",ios::out|ios::app);//write and append data
+    fp.open("stdudent.txt",ios::out|ios::app);//write and append data
     do{
 
         st.createstudent();
@@ -31,7 +31,7 @@ void displaysps(char n[])
 {
     cout<<"\nSTUDENT DETAILS\n";
     int flag=0;//student not found
-    fp.open("student.dat", ios::in);//read data
+    fp.open("stdudent.txt", ios::in);//read data
     while(fp.read((char *)&st,sizeof(student)))
     {
         if(strcmpi(st.retadmno(),n)==0)//not case sensitive
@@ -52,7 +52,7 @@ void displaysps(char n[])
 void writebook()
 {
     char ch;
-    fp.open("book.dat",ios::out|ios::app);//write and append data
+    fp.open("book.txt",ios::out|ios::app);//write and append data
     do{
 
         bk.createbook();
@@ -126,7 +126,7 @@ void modifystudent()
     cout<<"\n\nMODIFY STUDENT RECORD...";
     cout<<"\n\nEnter the Admission no. ";
     cin>>n;
-    fp.open("student.dat",ios::in|ios::out);
+    fp.open("stdudent.txt",ios::in|ios::out);
     while(fp.read((char*)&st,sizeof(student)) && found==0)
     {
         if(strcmpi(st.retadmno(),n)==0)
@@ -159,7 +159,7 @@ void deletestudent()
     cout<<"\n\n\n\tDELETE STUDENT...";
     cout<<"\n\nEnter the Admission no> : ";
     cin>>n;
-    fp.open("student.dat",ios::in|ios::out);
+    fp.open("stdudent.txt",ios::in|ios::out);
     fstream fp2;
     fp2.open("temp.dat",ios::out);
     fp.seekg(0,ios::beg);
@@ -175,8 +175,8 @@ void deletestudent()
     }
     fp2.close();
     fp.close();
-    remove("student.dat");
-    rename("temp.dat","student.dat");//data after deletion moved to temp
+    remove("stdudent.txt");
+    rename("temp.dat","stdudent.txt");//data after deletion moved to temp
     if(flag==1)
     {
         cout<<"\n\n\tRecord Deleted..";
@@ -225,7 +225,7 @@ void deletebook()
 void displayalls()
 {
 
-    fp.open("student.dat",ios::in);//read mode
+    fp.open("stdudent.txt",ios::in);//read mode
     if(!fp)
     {
         cout<<"File Could Not Be Open";
@@ -243,7 +243,7 @@ void displayalls()
     fp.close();
     getch();
 }
-void displayallb()
+void displayallbooks()
 {
 
     fp.open("book.txt",ios::in);//read mode
@@ -269,9 +269,9 @@ void bookissue()
     char sn[6],bn[6];
     int found=0,flag=0;
     cout<<"\n\nBOOK ISSUE...";
-    cout<<"\n\n\tEnter Enrollment no.";
+    cout<<"\n\n\tEnter Admission no.";
     cin>>sn;
-    fp.open("student.dat",ios::in|ios::out);
+    fp.open("stdudent.txt",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
     while(fp.read((char*)&st,sizeof(student))&& found==0)
     {
@@ -333,7 +333,7 @@ void bookdeposit()
     cout<<"\n\nBOOK DEPOSIT...";
     cout<<"\n\n\tEnter Admission no. Of Student";
     cin>>sn;
-    fp.open("student.dat",ios::in|ios::out);
+    fp.open("stdudent.txt",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
     while(fp.read((char*)&st,sizeof(student))&& found==0)
     {
@@ -397,13 +397,13 @@ void bookdeposit()
 
 void start()
 {
-    //gotoxy(35,11);
+
     cout<<"LIBRARY ";
-    //gotoxy(35,14);
+
     cout<<"MANAGEMENT ";
-    // gotoxy(35,17);
+
     cout<<"SYSTEM\n";
-    //getch();
+
 }
 
 void adminmenu()
@@ -440,7 +440,7 @@ void adminmenu()
             break;
         case 6:writebook();
             break;
-        case 7:displayallb();
+        case 7:displayallbooks();
             break;
         case 8:
         {

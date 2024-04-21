@@ -3,7 +3,7 @@
 
 class student
 {
-    char admno[6];//admission no.
+    char admno[10];//admission no.
     char name[20];
     char stbno[6];// student book no
     int token;//total book of student
@@ -14,6 +14,8 @@ public:
         cout<<"\nNEW STUDENT ENTRY...\n";
         cout<<"\nEnter The Admission No. ";
         cin>>admno;
+        if(strlen(admno) < 8 || strlen(admno) > 10)
+            throw '9';
         cout<<"Enter The Student Name "<<endl;
         cin.ignore();
         std::cin.getline(name, 10);

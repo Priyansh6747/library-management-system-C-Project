@@ -18,7 +18,7 @@ public:
         cin>>admno;
         if(strlen(admno) < 10 || strlen(admno) > 10)
             throw '9';
-        cout<<"Enter The Student Name "<<endl;
+        cout<<"Enter The Student Name :"<<endl;
         cin.ignore();
         gets(name);
         token=0;

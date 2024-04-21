@@ -16,7 +16,7 @@ public:
         cout<<"\nNEW STUDENT ENTRY...\n";
         cout<<"\nEnter The Admission No. ";
         cin>>admno;
-        if(strlen(admno) < 8 || strlen(admno) > 10)
+        if(strlen(admno) < 10 || strlen(admno) > 10)
             throw '9';
         cout<<"Enter The Student Name "<<endl;
         cin.ignore();

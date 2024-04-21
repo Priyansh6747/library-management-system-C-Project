@@ -289,7 +289,8 @@ void bookissue()
     int found=0,flag=0;
 
     cout<<"\n\nBOOK ISSUE...";
-    cout<<"\n\n\tEnter Enrollment no.";
+    cout<<"\n\n\tEnter Enrollment no. "
+          "With Name E.g. 9923103033Hardik";
     cin>>sn;
     fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
@@ -312,9 +313,9 @@ void bookissue()
                         int pos=-1*sizeof(st);
                         fp.seekg(pos,ios::cur);
                         fp.write((char*)&st,sizeof(student));
-                        cout<<"\n\n\tBook Issued Successfully\n\n Please Note The Book Issue Date On Backside Of Your Book And Return Book Within 15 Days, Otherwise Fine Of 15 Rs Per Day";
-
-
+                        cout<<"\n\n\tBook Issued Successfully\n\n "
+                              "Please Note The Book Issue Date On Backside Of Your Book"
+                              " And Return Book Within 15 Days, Otherwise Fine Of 10 Rs Per Day"<<endl;
                     }
                 }
                 if(flag==0)
@@ -352,7 +353,7 @@ void bookdeposit()
     int found=0,flag=0,day,fine;
 
     cout<<"\n\nBOOK DEPOSIT...";
-    cout<<"\n\n\tEnter Enrollment no. Of Student";
+    cout<<"\n\n\tEnter Enrollment no.With Name E.g. 9923103033Hardik Of Student";
     cin>>sn;
     fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
@@ -373,8 +374,8 @@ void bookdeposit()
                         cin>>day;
                         if(day>15)
                         {
-                            fine=(day-15)*1;
-                            cout<<"\n\n Fine = "<<fine;
+                            fine=(day-15)*10;
+                            cout<<"\n\n The imposed fine is  = "<<fine;
                         }
                         st.resettoken();
 
@@ -449,7 +450,7 @@ void adminmenu()
             break;
         case 3: char num[15];
 
-            cout<<"\n\n\t Please enter Enrollment no.";
+            cout<<"\n\n\t Please Enter Enrollment no.With Name E.g. 9923103033Hardik";
             cin>>num;
             displaysps(num);
             break;

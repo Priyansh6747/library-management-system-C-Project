@@ -10,13 +10,47 @@
 using namespace std;
 
 fstream fp,fp1;//object
-book bk;//book class object
+book bk;
+book* bookObj;
 student st;//student class object
+
+using namespace std;
+void writebook()
+{
+    char ch;
+    fp.open("book.dat",ios::out|ios::app);//write and append data
+    do{
+        cout<<"Enter Book Type\n"
+              "\t1)TextBook\n"
+              "\t2)StoryBook\n"
+              "\t3)General Book"<<endl;
+        int choice;
+        cin>>choice;
+        switch (choice) {
+            case 1:
+                bookObj = new Textbook;
+                break;
+            case 2:
+                bookObj = new StoryBook;
+                break;
+            case 3:
+                bookObj = new book;
+                break;
+            default:
+                throw '5';
+        }
+        bk.createbook();
+        fp.write((char*)&bk,sizeof(book));//size of class
+        cout<<"\n\nDo you want to add more record...(y/n?) ";
+        cin>>ch;
+    }while(ch=='y'||ch=='Y');
+    fp.close();
+}
 
 void writestudent()
 {
     char ch;
-    fp.open("stdudent.txt",ios::out|ios::app);//write and append data
+    fp.open("student.dat",ios::out|ios::app);//write and append data
     do{
 
         st.createstudent();
@@ -26,44 +60,6 @@ void writestudent()
     }while(ch=='y'||ch=='Y');
     fp.close();
 }
-
-void displaysps(char n[])
-{
-    cout<<"\nSTUDENT DETAILS\n";
-    int flag=0;//student not found
-    fp.open("stdudent.txt", ios::in);//read data
-    while(fp.read((char *)&st,sizeof(student)))
-    {
-        if(strcmpi(st.retadmno(),n)==0)//not case sensitive
-        {
-            st.showstudent();
-            flag=1;
-        }
-    }
-    fp.close();
-    if(flag==0)//student not found
-    {
-        cout<<"\n\nStudent does not exist";
-
-    }
-    getch();
-}
-
-void writebook()
-{
-    char ch;
-    fp.open("book.txt",ios::out|ios::app);//write and append data
-    do{
-
-        bk.createbook();
-        fp.write((char*)&bk,sizeof(book));//size of class
-        cout<<"\n\nDo you want to add more record...(y/n?) ";
-        cin>>ch;
-    }while(ch=='y'||ch=='Y');
-    fp.close();
-}
-
-
 void displayspb(char n[])
 {
     cout<<"\nBOOK DETAILS\n";
@@ -85,7 +81,27 @@ void displayspb(char n[])
     }
     getch();
 }
+void displaysps(char n[])
+{
+    cout<<"\nSTUDENT DETAILS\n";
+    int flag=0;//student not found
+    fp.open("student.dat", ios::in);//read data
+    while(fp.read((char *)&st,sizeof(student)))
+    {
+        if(strcmpi(st.retadmno(),n)==0)//not case sensitive
+        {
+            st.showstudent();
+            flag=1;
+        }
+    }
+    fp.close();
+    if(flag==0)//student not found
+    {
+        cout<<"\n\nStudent does not exist";
 
+    }
+    getch();
+}
 void modifybook()
 {
     char n[6];
@@ -124,9 +140,9 @@ void modifystudent()
     int found=0;//seach book of given data
 
     cout<<"\n\nMODIFY STUDENT RECORD...";
-    cout<<"\n\nEnter the Admission no. ";
+    cout<<"\n\nEnter the Enrollment no. ";
     cin>>n;
-    fp.open("stdudent.txt",ios::in|ios::out);
+    fp.open("student.dat",ios::in|ios::out);
     while(fp.read((char*)&st,sizeof(student)) && found==0)
     {
         if(strcmpi(st.retadmno(),n)==0)
@@ -157,9 +173,9 @@ void deletestudent()
     int flag=0;
 
     cout<<"\n\n\n\tDELETE STUDENT...";
-    cout<<"\n\nEnter the Admission no> : ";
+    cout<<"\n\nEnter the Enrollment no> : ";
     cin>>n;
-    fp.open("stdudent.txt",ios::in|ios::out);
+    fp.open("student.dat",ios::in|ios::out);
     fstream fp2;
     fp2.open("temp.dat",ios::out);
     fp.seekg(0,ios::beg);
@@ -175,8 +191,8 @@ void deletestudent()
     }
     fp2.close();
     fp.close();
-    remove("stdudent.txt");
-    rename("temp.dat","stdudent.txt");//data after deletion moved to temp
+    remove("student.dat");
+    rename("temp.dat","student.dat");//data after deletion moved to temp
     if(flag==1)
     {
         cout<<"\n\n\tRecord Deleted..";
@@ -191,6 +207,7 @@ void deletebook()
 {
     char n[6];//book no.
     int flag=0;
+
     cout<<"\n\n\n\tDELETE BOOK...";
     cout<<"\n\nEnter the Book no> : ";
     cin>>n;
@@ -225,7 +242,7 @@ void deletebook()
 void displayalls()
 {
 
-    fp.open("stdudent.txt",ios::in);//read mode
+    fp.open("student.dat",ios::in);//read mode
     if(!fp)
     {
         cout<<"File Could Not Be Open";
@@ -234,7 +251,7 @@ void displayalls()
     }
     cout<<"\n\n\t\tStudent List\n\n";
     cout<<"==================================================================\n";
-    cout<<"\tAdmission No."<<setw(10)<<"Name"<<setw(20)<<"Book Issued\n";
+    cout<<"\tEnrollment No."<<setw(10)<<"Name"<<setw(20)<<"Book Issued\n";
     cout<<"==================================================================\n";
     while(fp.read((char*)&st,sizeof(student)))
     {
@@ -243,10 +260,10 @@ void displayalls()
     fp.close();
     getch();
 }
-void displayallbooks()
+void displayallb()
 {
 
-    fp.open("book.txt",ios::in);//read mode
+    fp.open("book.dat",ios::in);//read mode
     if(!fp)
     {
         cout<<"File Could Not Be Open";
@@ -268,10 +285,11 @@ void bookissue()
 {
     char sn[6],bn[6];
     int found=0,flag=0;
+
     cout<<"\n\nBOOK ISSUE...";
-    cout<<"\n\n\tEnter Admission no.";
+    cout<<"\n\n\tEnter Enrollment no.";
     cin>>sn;
-    fp.open("stdudent.txt",ios::in|ios::out);
+    fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
     while(fp.read((char*)&st,sizeof(student))&& found==0)
     {
@@ -330,10 +348,11 @@ void bookdeposit()
 {
     char sn[6],bn[6];
     int found=0,flag=0,day,fine;
+
     cout<<"\n\nBOOK DEPOSIT...";
-    cout<<"\n\n\tEnter Admission no. Of Student";
+    cout<<"\n\n\tEnter Enrollment no. Of Student";
     cin>>sn;
-    fp.open("stdudent.txt",ios::in|ios::out);
+    fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
     while(fp.read((char*)&st,sizeof(student))&& found==0)
     {
@@ -397,17 +416,14 @@ void bookdeposit()
 
 void start()
 {
-
-    cout<<"LIBRARY ";
-
-    cout<<"MANAGEMENT ";
-
-    cout<<"SYSTEM\n";
-
+    cout<<"==================================================================\n";
+    cout<<"\n\n\n\tLIBRARY MANAGEMENT SYSTEM\n\n"<<endl;
+    cout<<"==================================================================\n";
+    getch();
 }
-
 void adminmenu()
 {
+
     int ch2;
     cout<<"\n\n\n\tADMINISTRATOR MENU";
     cout<<"\n\n\n\t1.CREATE STUDENT RECORD";
@@ -430,7 +446,8 @@ void adminmenu()
         case 2: displayalls();
             break;
         case 3: char num[6];
-            cout<<"\n\n\t Please enter admission no.";
+
+            cout<<"\n\n\t Please enter Enrollment no.";
             cin>>num;
             displaysps(num);
             break;
@@ -440,11 +457,11 @@ void adminmenu()
             break;
         case 6:writebook();
             break;
-        case 7:displayallbooks();
+        case 7:displayallb();
             break;
         case 8:
-        {
-            char num[6];
+        {char num[6];
+
             cout<<"\n\n\tPlease enter book no.";
             cin>>num;
             displayspb(num);
@@ -477,11 +494,12 @@ int main()
         try {
             cin>>ch;
             if(ch >= 'A' && ch <= 'Z')
-                throw "Character";
+                throw "Error";
             else if(ch >= 'a' && ch <= 'z')
-                throw "Character";
+                throw "Error";
             switch(ch)
-            { case '1': bookissue();
+            { 
+                case '1': bookissue();
                     break;
                 case '2': bookdeposit();
                     break;
@@ -490,24 +508,36 @@ int main()
                     break;
                 case '4':
                     exit(0);
-                    break;
                 default:
                     if(ch > '0' && ch < '9')
                         throw '0';
+                    else
+                        throw "Error";
             }
         }
         catch (char Error_Code)
         {
             if(Error_Code == '0')
             {
-                cerr<<"\tInvalid choice "<<endl;
-                return 0;
+                cerr<<"\n\n\n\tInvalid choice "<<endl;
+            }
+            if(Error_Code == '1')
+            {
+                cerr<<"\n\n\n\tInvalid Book number"<<endl;
+            }
+            if(Error_Code == '5')
+            {
+                cerr<<"\n\n\n\tInvalid Book Type"<<endl;
+            }
+            if(Error_Code == '9')
+            {
+                cerr<<"\n\n\n\tInvalid Enrollment no"<<endl;
             }
         }
         catch (...)
         {
-            cerr<<"\tPlease Enter a number"<<endl;
-            return 0;
+            cerr<<"\n\n\n\tOops look like something is not right\n"
+                  "\t\tPlease try again"<<endl;
         }
     }while(ch!=4 );
     return 0;

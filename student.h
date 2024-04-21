@@ -40,6 +40,7 @@ public:
     {
         cout<<"\nAdmission No. "<<admno;
         cout<<"\nModify Student Name : ";
+        cin.ignore();
         gets(name);
     }
     char* retadmno()
@@ -68,6 +69,6 @@ public:
     }
     void report()
     {
-        cout<<"\t"<<admno<<setw(20)<<name<<setw(10)<<token<<endl ;
+        cout<<"\t"<<admno<<setw(10)<<setw(10)<<token<<endl ;
     }
 };//class ends here

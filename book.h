@@ -14,9 +14,11 @@ public:
         cout<<"\nNEW BOOK ENTRY...\n";
         cout<<"\nENTER BOOK NO.";
         cin>>bno;
+        if(strlen(bno) > 6 || strlen(bno) < 2)
+            throw '1';
         cout<<"\nENTER BOOK NAME"<<endl;
         cin.ignore();
-        cin.getline(bname,30);
+        gets(bname);//enables enter with space
         cout<<"\nENTER AUTHOR NAME";
         gets(aname);
         cout<<"\n\n\nBook Created..";
@@ -48,9 +50,9 @@ public:
     {
         cout<<bno<<setw(30)<<bname<<setw(30)<<aname<<endl;
     }
-};//class ends here
+};
 
-class Textbook : protected book
+class Textbook : public book
 {
 private:
     string Academic_Level;
@@ -86,7 +88,9 @@ public:
         cin>>NumberOfIssues;
     }
 };
-class StoryBook : protected book
+
+
+class StoryBook : public book
 {
 private:
     string Genre;
@@ -134,4 +138,3 @@ public:
             IsIssueAllowed = false;
     }
 };
-

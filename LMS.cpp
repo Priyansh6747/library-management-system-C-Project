@@ -15,37 +15,6 @@ book* bookObj;
 student st;//student class object
 
 using namespace std;
-void writebook()
-{
-    char ch;
-    fp.open("book.dat",ios::out|ios::app);//write and append data
-    do{
-        cout<<"Enter Book Type\n"
-              "\t1)TextBook\n"
-              "\t2)StoryBook\n"
-              "\t3)General Book"<<endl;
-        int choice;
-        cin>>choice;
-        switch (choice) {
-            case 1:
-                bookObj = new Textbook;
-                break;
-            case 2:
-                bookObj = new StoryBook;
-                break;
-            case 3:
-                bookObj = new book;
-                break;
-            default:
-                throw '5';
-        }
-        bk.createbook();
-        fp.write((char*)&bk,sizeof(book));//size of class
-        cout<<"\n\nDo you want to add more record...(y/n?) ";
-        cin>>ch;
-    }while(ch=='y'||ch=='Y');
-    fp.close();
-}
 
 void writestudent()
 {
@@ -136,7 +105,7 @@ void modifybook()
 }
 void modifystudent()
 {
-    char n[6];
+    char n[15];
     int found=0;//seach book of given data
 
     cout<<"\n\nMODIFY STUDENT RECORD...";
@@ -203,6 +172,39 @@ void deletestudent()
     }
     getch();
 }
+
+void writebook()
+{
+    char ch;
+    fp.open("book.dat",ios::out|ios::app);//write and append data
+    do{
+        cout<<"Enter Book Type\n"
+              "\t1)TextBook\n"
+              "\t2)StoryBook\n"
+              "\t3)General Book"<<endl;
+        int choice;
+        cin>>choice;
+        switch (choice) {
+            case 1:
+                bookObj = new Textbook;
+                break;
+            case 2:
+                bookObj = new StoryBook;
+                break;
+            case 3:
+                bookObj = new book;
+                break;
+            default:
+                throw '5';
+        }
+        bk.createbook();
+        fp.write((char*)&bk,sizeof(book));//size of class
+        cout<<"\n\nDo you want to add more record...(y/n?) ";
+        cin>>ch;
+    }while(ch=='y'||ch=='Y');
+    fp.close();
+}
+
 void deletebook()
 {
     char n[6];//book no.
@@ -251,7 +253,7 @@ void displayalls()
     }
     cout<<"\n\n\t\tStudent List\n\n";
     cout<<"==================================================================\n";
-    cout<<"\tEnrollment No."<<setw(10)<<"Name"<<setw(20)<<"Book Issued\n";
+    cout<<"Enrollment No."<<setw(10)<<"Name"<<setw(20)<<"Book Issued\n";
     cout<<"==================================================================\n";
     while(fp.read((char*)&st,sizeof(student)))
     {
@@ -283,7 +285,7 @@ void displayallb()
 }
 void bookissue()
 {
-    char sn[6],bn[6];
+    char sn[15],bn[15];
     int found=0,flag=0;
 
     cout<<"\n\nBOOK ISSUE...";
@@ -346,7 +348,7 @@ void bookissue()
 
 void bookdeposit()
 {
-    char sn[6],bn[6];
+    char sn[15],bn[15];
     int found=0,flag=0,day,fine;
 
     cout<<"\n\nBOOK DEPOSIT...";
@@ -416,9 +418,9 @@ void bookdeposit()
 
 void start()
 {
-    cout<<"==================================================================\n";
-    cout<<"\n\n\n\tLIBRARY MANAGEMENT SYSTEM\n\n"<<endl;
-    cout<<"==================================================================\n";
+    cout<<"\t\t==================================================================\n";
+    cout<<"\n\n\n\t\t\t\tLIBRARY MANAGEMENT SYSTEM\n\n"<<endl;
+    cout<<"\t\t==================================================================\n";
     getch();
 }
 void adminmenu()
@@ -445,7 +447,7 @@ void adminmenu()
             break;
         case 2: displayalls();
             break;
-        case 3: char num[6];
+        case 3: char num[15];
 
             cout<<"\n\n\t Please enter Enrollment no.";
             cin>>num;
@@ -498,7 +500,7 @@ int main()
             else if(ch >= 'a' && ch <= 'z')
                 throw "Error";
             switch(ch)
-            { 
+            {
                 case '1': bookissue();
                     break;
                 case '2': bookdeposit();

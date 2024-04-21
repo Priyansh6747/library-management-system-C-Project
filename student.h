@@ -1,5 +1,7 @@
 #include <iostream>
-#include<cstring>
+#include<string>
+
+using namespace std ;
 
 class student
 {
@@ -18,7 +20,7 @@ public:
             throw '9';
         cout<<"Enter The Student Name "<<endl;
         cin.ignore();
-        std::cin.getline(name, 10);
+        gets(name);
         token=0;
         stbno[0]='\0';
         cout<<"\n\nStudent Record Created...";

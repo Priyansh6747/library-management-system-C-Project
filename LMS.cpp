@@ -18,7 +18,7 @@ using namespace std;
 
 void Rules()
 {
-    cout <<"\n\n\t                      RULES           ";
+    cout <<"\n\n\t                      RULES OF JIIT LRC           ";
     cout<<"\n\n\t  1) A student can borrow a Single book at a time\n"
             "\n\t  2)A valid student ID is required to issue a book\n"
             "\n\t  3) Issued book should be deposited back to library else fine of Rs10 will be imposed in the bearer "<<endl;

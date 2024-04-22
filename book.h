@@ -34,7 +34,8 @@ public:
     virtual void modifybook()
     {
         cout<<"\nBook Number: "<<bno;
-        cout<<"\nModify Book Name :";
+        cout<<"\nModify Book Name :"<<endl;
+        cin.ignore();
         gets(bname);
         cout<<"\nModify Author's Name :";
         gets(aname);

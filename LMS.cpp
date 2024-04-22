@@ -147,7 +147,7 @@ void modifystudent()
 
 void deletestudent()
 {
-    char n[6];
+    char n[15];
     int flag=0;
 
     cout<<"\n\n\ttDELETE STUDENT...";

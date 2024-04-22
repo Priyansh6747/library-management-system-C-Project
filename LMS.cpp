@@ -16,6 +16,15 @@ student st;//student class object
 
 using namespace std;
 
+void Rules()
+{
+    cout <<"\n\n\t                      RULES           ";
+    cout<<"\n\n\t  1) A student can borrow a Single book at a time\n"
+            "\n\t  2)A valid student ID is required to issue a book\n"
+            "\n\t  3) Issued book should be deposited back to library else fine of Rs10 will be imposed in the bearer "<<endl;
+            getch();
+}
+
 void writestudent()
 {
     char ch;
@@ -108,8 +117,8 @@ void modifystudent()
     char n[15];
     int found=0;//seach book of given data
 
-    cout<<"\n\nMODIFY STUDENT RECORD...";
-    cout<<"\n\nEnter the Enrollment no. ";
+    cout<<"\n\n\tMODIFY STUDENT RECORD...";
+    cout<<"\n\n\tEnter the Enrollment no.(e.g  9923103033Hardik) ";
     cin>>n;
     fp.open("student.dat",ios::in|ios::out);
     while(fp.read((char*)&st,sizeof(student)) && found==0)
@@ -141,8 +150,8 @@ void deletestudent()
     char n[6];
     int flag=0;
 
-    cout<<"\n\n\n\tDELETE STUDENT...";
-    cout<<"\n\nEnter the Enrollment no> : ";
+    cout<<"\n\n\ttDELETE STUDENT...";
+    cout<<"\n\n\tEnter the Enrollment no along with name (e.g 9923103042Priyansh) : ";
     cin>>n;
     fp.open("student.dat",ios::in|ios::out);
     fstream fp2;
@@ -211,7 +220,7 @@ void deletebook()
     int flag=0;
 
     cout<<"\n\n\n\tDELETE BOOK...";
-    cout<<"\n\nEnter the Book no> : ";
+    cout<<"\n\n\tEnter the Book no> : ";
     cin>>n;
     fp.open("book.dat",ios::in|ios::out);
     fstream fp2;//New onject
@@ -237,7 +246,7 @@ void deletebook()
     }
     else
     {
-        cout<<"\n\nRecord not Found";
+        cout<<"\n\n\tRecord not Found";
     }
     getch();
 }
@@ -288,9 +297,9 @@ void bookissue()
     char sn[15],bn[15];
     int found=0,flag=0;
 
-    cout<<"\n\nBOOK ISSUE...";
+    cout<<"\n\n\tBOOK ISSUE...";
     cout<<"\n\n\tEnter Enrollment no. "
-          "With Name E.g. 9923103033Hardik";
+          "With Name (E.g. 9923103033Hardik)";
     cin>>sn;
     fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
@@ -320,7 +329,7 @@ void bookissue()
                 }
                 if(flag==0)
                 {
-                    cout<<"Book No. Does Not Exists";
+                    cout<<"\n\n\tBook No. Does Not Exists";
                 }
 
             }
@@ -328,7 +337,7 @@ void bookissue()
             else
             {
 
-                cout<<"You Have Not Returned The Last Book";
+                cout<<"\n\n\tYou Have Not Returned The Last Book";
 
             }
 
@@ -339,7 +348,7 @@ void bookissue()
     }
     if(found==0)
     {
-        cout<<"Student Record Not Exists...";
+        cout<<"\n\n\tStudent Record Not Exists...";
 
     }
     getch();
@@ -353,7 +362,7 @@ void bookdeposit()
     int found=0,flag=0,day,fine;
 
     cout<<"\n\nBOOK DEPOSIT...";
-    cout<<"\n\n\tEnter Enrollment no.With Name E.g. 9923103033Hardik Of Student";
+    cout<<"\n\n\tEnter Enrollment no.With Name (E.g. 9923103033Hardik)  ";
     cin>>sn;
     fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
@@ -375,7 +384,7 @@ void bookdeposit()
                         if(day>15)
                         {
                             fine=(day-15)*10;
-                            cout<<"\n\n The imposed fine is  = "<<fine;
+                            cout<<"\n\n\t The imposed fine is  = "<<fine;
                         }
                         st.resettoken();
 
@@ -440,7 +449,7 @@ void adminmenu()
     cout<<"\n\n\n\t9.MODIFY BOOK RECORD";
     cout<<"\n\n\n\t10.DELETE BOOK RECORD";
     cout<<"\n\n\n\t11.BACK TO MAIN MENU";
-    cout<<"\n\n\n\tPLEASE ENTER YOUR CHOICE(1-11)";
+    cout<<"\n\n\n\tPLEASE ENTER YOUR CHOICE(1-11)  ";
     cin>>ch2;
     switch(ch2)
     {
@@ -477,7 +486,7 @@ void adminmenu()
         case 11:
             return;
         default:
-            cout<<"Invalid choice";
+            cout<<"\n\n\tInvalid choice";
     }
     adminmenu();
 }
@@ -490,10 +499,12 @@ int main()
     do{
         cout<<"\n\n\n\t MAIN MENU";
         cout<<"\n\n\n\t1 BOOK ISSUE";
-        cout<<"\n\n\n\t2 BOOK DEPOSIT";
-        cout<<"\n\n\n\t3 ADMINISTRATOR MENU";
-        cout<<"\n\n\n\t4 EXIT";
-        cout<<"\n\n\n\t PLEASE SELECT YOUR OPTION(1-4)";
+        cout<<"\n\n\n\t2 BOOK DEPOSIT";        
+        cout<<"\n\n\n\t3 View All Available Books";
+        cout<<"\n\n\n\t4 ADMINISTRATOR MENU";
+        cout<<"\n\n\n\t5 View Rules and regulations of library ";
+        cout<<"\n\n\n\t6 EXIT";
+        cout<<"\n\n\n\t PLEASE SELECT YOUR OPTION(1-6)";
         try {
             cin>>ch;
             if(ch >= 'A' && ch <= 'Z')
@@ -507,9 +518,15 @@ int main()
                 case '2': bookdeposit();
                     break;
                 case '3':
+                    displayallb(); 
+                    break;   
+                case '4':
                     adminmenu();
                     break;
-                case '4':
+                case '5':
+                    Rules();
+                    break;    
+                case '6':
                     exit(0);
                 default:
                     if(ch > '0' && ch < '9')
@@ -542,6 +559,6 @@ int main()
             cerr<<"\n\n\n\tOops look like something is not right\n"
                   "\t\tPlease try again"<<endl;
         }
-    }while(ch!=4 );
+    }while(ch!='6' );
     return 0;
 }

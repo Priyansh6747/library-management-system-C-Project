@@ -178,7 +178,7 @@ void writebook()
     char ch;
     fp.open("book.dat",ios::out|ios::app);//write and append data
     do{
-        cout<<"Enter Book Type\n"
+        cout<<"\n\n\tEnter Book Type\n"
               "\t1)TextBook\n"
               "\t2)StoryBook\n"
               "\t3)General Book"<<endl;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include<cstring>
+#include<iomanip>
 
 
 using namespace std;
@@ -11,33 +12,33 @@ class book
 public:
     virtual void createbook()
     {
-        cout<<"\nNEW BOOK ENTRY...\n";
-        cout<<"\nENTER BOOK NO.";
+        cout<<"\n\tNEW BOOK ENTRY...\n";
+        cout<<"\n\tENTER BOOK NO.(2 to 4 digits )";
         cin>>bno;
         if(strlen(bno) > 6 || strlen(bno) < 2)
             throw '1';
-        cout<<"\nENTER BOOK NAME"<<endl;
+        cout<<"\n\tENTER BOOK NAME ";
         cin.ignore();
         gets(bname);//enables enter with space
-        cout<<"\nENTER AUTHOR NAME";
+        cout<<"\n\tENTER AUTHOR NAME  ";
         gets(aname);
-        cout<<"\n\n\nBook Created..";
+        cout<<"\n\n\n\tBook Created..";
     }
     virtual void showbook()
     {
-        cout<<"\nBook Number: "<<bno;
-        cout<<"\nBook Name: ";
+        cout<<"\n\tBook Number: "<<bno;
+        cout<<"\n\tBook Name: ";
         puts(bname);
-        cout<<"\nBook Author Name: ";
+        cout<<"\n\tBook Author Name: ";
         puts(aname);
     }
     virtual void modifybook()
     {
-        cout<<"\nBook Number: "<<bno;
-        cout<<"\nModify Book Name :"<<endl;
+        cout<<"\n\tBook Number: "<<bno;
+        cout<<"\n\tModify Book Name :";
         cin.ignore();
         gets(bname);
-        cout<<"\nModify Author's Name :";
+        cout<<"\n\tModify Author's Name :";
         gets(aname);
 
     }

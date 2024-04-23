@@ -13,24 +13,24 @@ public:
     void createstudent()
     {
 
-        cout<<"\nNEW STUDENT ENTRY...\n";
-        cout<<"\nEnter The Admission No. :";
+        cout<<"\n\n\tNEW STUDENT ENTRY...\n";
+        cout<<"\n\tEnter your 10 digit Admission No. :";
         cin>>admno;
         if(strlen(admno) < 10 || strlen(admno) > 10)
             throw '9';
-        cout<<"Enter The Student Name :";
+        cout<<"\tEnter The Student Name :";
         cin.ignore();
         gets(name);
         token=0;
         stbno[0]='\0';
-        cout<<"\n\nStudent Record Created...";
+        cout<<"\n\n\tStudent Record Created...";
     }
     void showstudent()
     {
-        cout<<"\nAdmission Number : "<<admno;
-        cout<<"\nStudent Name : ";
+        cout<<"\n\tAdmission Number : "<<admno;
+        cout<<"\n\tStudent Name : ";
         puts(name);
-        cout<<"\nNo of Book Issued : "<<token;
+        cout<<"\n\tNo of Book Issued : "<<token;
         if(token==1)
         {
             cout<<"\nBook Number "<<stbno;
@@ -38,8 +38,8 @@ public:
     }
     void modifystudent()
     {
-        cout<<"\nAdmission No. "<<admno;
-        cout<<"\nModify Student Name : ";
+        cout<<"\n\tAdmission No. "<<admno;
+        cout<<"\n\tModify Student Name : ";
         cin.ignore();
         gets(name);
     }

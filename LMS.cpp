@@ -21,7 +21,7 @@ void Rules()
     cout <<"\n\n\t                      RULES OF JIIT LRC           ";
     cout<<"\n\n\t  1) A student can borrow a Single book at a time\n"
             "\n\t  2)A valid student ID is required to issue a book\n"
-            "\n\t  3) Issued book should be deposited back to library else fine of Rs10 will be imposed in the bearer "<<endl;
+            "\n\t  3) Issued book should be deposited back to library within 15 days, else fine of Rs10 will be imposed on the bearer "<<endl;
             getch();
 }
 
@@ -33,7 +33,7 @@ void writestudent()
 
         st.createstudent();
         fp.write((char*)&st,sizeof(student));//size of class
-        cout<<"\n\nDo you want to add more record...(y/n?) ";
+        cout<<"\n\n\tDo you want to add more record...(y/n?) ";
         cin>>ch;
     }while(ch=='y'||ch=='Y');
     fp.close();
@@ -54,7 +54,7 @@ void displayspb(char n[])
     fp.close();
     if(flag==0)//book not found
     {
-        cout<<"\n\nBook does not exist";
+        cout<<"\n\n\tBook does not exist";
 
     }
     getch();
@@ -75,7 +75,7 @@ void displaysps(char n[])
     fp.close();
     if(flag==0)//student not found
     {
-        cout<<"\n\nStudent does not exist";
+        cout<<"\n\n\tStudent does not exist";
 
     }
     getch();
@@ -85,8 +85,8 @@ void modifybook()
     char n[6];
     int found=0;//seach book of given data
 
-    cout<<"\n\nMODIFY BOOK RECORD...";
-    cout<<"\n\nEnter the book no. ";
+    cout<<"\n\n\tMODIFY BOOK RECORD...";
+    cout<<"\n\n\tEnter the book no. ";
     cin>>n;
     fp.open("book.dat",ios::in|ios::out);
     while(fp.read((char*)&bk,sizeof(book)) && found==0)
@@ -94,7 +94,7 @@ void modifybook()
         if(strcmpi(bk.retbno(),n)==0)
         {
             bk.showbook();
-            cout<<"\nEnter the new details book";
+            cout<<"\n\tEnter the new details book";
             bk.modifybook();
             int pos=-1*sizeof(bk);
             fp.seekp(pos,ios::cur);//back from current position
@@ -107,7 +107,7 @@ void modifybook()
     fp.close();
     if(found==0)
     {
-        cout<<"\n\nRecord Not Found";
+        cout<<"\n\n\tRecord Not Found";
 
     }
     getch();//press key to get out
@@ -131,7 +131,7 @@ void modifystudent()
             int pos=-1*sizeof(st);
             fp.seekp(pos,ios::cur);//back from current position
             fp.write((char *)&st,sizeof(student));
-            cout<<"\n\nRecord Updated";
+            cout<<"\n\n\tRecord Updated";
             found=1;
         }
 
@@ -147,7 +147,7 @@ void modifystudent()
 
 void deletestudent()
 {
-    char n[15];
+    char n[6];
     int flag=0;
 
     cout<<"\n\n\ttDELETE STUDENT...";
@@ -220,7 +220,7 @@ void deletebook()
     int flag=0;
 
     cout<<"\n\n\n\tDELETE BOOK...";
-    cout<<"\n\n\tEnter the Book no> : ";
+    cout<<"\n\n\tEnter the Book no : ";
     cin>>n;
     fp.open("book.dat",ios::in|ios::out);
     fstream fp2;//New onject
@@ -299,7 +299,7 @@ void bookissue()
 
     cout<<"\n\n\tBOOK ISSUE...";
     cout<<"\n\n\tEnter Enrollment no. "
-          "With Name (E.g. 9923103033Hardik)";
+          "With Name (E.g. 9923103033Hardik) ";
     cin>>sn;
     fp.open("student.dat",ios::in|ios::out);
     fp1.open("book.dat",ios::in|ios::out);
@@ -337,7 +337,7 @@ void bookissue()
             else
             {
 
-                cout<<"\n\n\tYou Have Not Returned The Last Book";
+                cout<<"\n\n\tYou Have Not Returned The Last Book ";
 
             }
 
@@ -348,7 +348,7 @@ void bookissue()
     }
     if(found==0)
     {
-        cout<<"\n\n\tStudent Record Not Exists...";
+        cout<<"\n\n\tStudent Record Not Exists... ";
 
     }
     getch();
@@ -379,12 +379,13 @@ void bookdeposit()
                     {
                         flag=1;
                         bk.showbook();
-                        cout<<"\n\n Book Deposited In No. Of Days";
+                        cout<<"\n\n\t Book Deposited In No. Of Days : ";
                         cin>>day;
                         if(day>15)
                         {
                             fine=(day-15)*10;
-                            cout<<"\n\n\t The imposed fine is  = "<<fine;
+                            cout<<"\n\tDue to late delivery of book fine will be imposed!!";
+                            cout<<"\n\n\t The imposed fine is  = "<<fine<<"Rs";
                         }
                         st.resettoken();
 
@@ -459,7 +460,7 @@ void adminmenu()
             break;
         case 3: char num[15];
 
-            cout<<"\n\n\t Please Enter Enrollment no.With Name E.g. 9923103033Hardik";
+            cout<<"\n\n\t Please Enter Enrollment no.With Name (e.g. 9923103033Hardik)  " ;
             cin>>num;
             displaysps(num);
             break;
@@ -474,7 +475,7 @@ void adminmenu()
         case 8:
         {char num[6];
 
-            cout<<"\n\n\tPlease enter book no.";
+            cout<<"\n\n\tPlease enter book no. ";
             cin>>num;
             displayspb(num);
             break;
@@ -504,7 +505,7 @@ int main()
         cout<<"\n\n\n\t4 ADMINISTRATOR MENU";
         cout<<"\n\n\n\t5 View Rules and regulations of library ";
         cout<<"\n\n\n\t6 EXIT";
-        cout<<"\n\n\n\t PLEASE SELECT YOUR OPTION(1-6)";
+        cout<<"\n\n\n\t PLEASE SELECT YOUR OPTION(1-6) ";
         try {
             cin>>ch;
             if(ch >= 'A' && ch <= 'Z')
@@ -527,6 +528,8 @@ int main()
                     Rules();
                     break;    
                 case '6':
+                cout<<"\n\n\t     Thank you for using our Library management system.  ";               
+
                     exit(0);
                 default:
                     if(ch > '0' && ch < '9')
